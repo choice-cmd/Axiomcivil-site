@@ -1,0 +1,62 @@
+---
+import site from '../data/site.json';
+// Netlify Forms picks this up automatically at deploy time (data-netlify).
+// Submissions land in Netlify → Forms; scripts/pull-leads.mjs retrieves them.
+---
+<section class="band alt" id="contact">
+  <div class="wrap grid">
+    <div class="reveal">
+      <p class="eyebrow">Contact</p>
+      <h2>Ready to bring precision to your next project?</h2>
+      <p class="body">Scoping a federal contract, running a complex job that needs senior survey leadership, or sitting on survey data that needs processing — tell me about it.</p>
+      <div class="direct">
+        <a href={`mailto:${site.principal.email}`}>{site.principal.email}</a>
+        <a href={`tel:${site.principal.phoneE164}`}>{site.principal.phone}</a>
+      </div>
+    </div>
+    <form class="form reveal" name="contact" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="company_website">
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hp"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="two">
+        <label>Name<input name="name" required autocomplete="name" /></label>
+        <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+      </div>
+      <div class="two">
+        <label>Organization<input name="organization" autocomplete="organization" /></label>
+        <label>I need help with
+          <select name="need">
+            <option>Survey management / consulting</option>
+            <option>Survey data processing</option>
+            <option>Project engineering support</option>
+            <option>Federal teaming / subcontracting</option>
+            <option>Something else</option>
+          </select>
+        </label>
+      </div>
+      <label>Project details<textarea name="message" rows="5" required placeholder="Project, location, schedule, and what you need."></textarea></label>
+      <p class="fine">Please don't send controlled or classified information through this form. We'll arrange a secure channel if the project needs one.</p>
+      <button class="btn btn-primary" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  .direct { display: flex; flex-direction: column; gap: 6px; margin-top: 1.75rem; }
+  .direct a { color: var(--cyan); text-decoration: none; font-size: 15px; }
+  .direct a:hover { text-decoration: underline; }
+  .form { display: grid; gap: 16px; background: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label { display: grid; gap: 6px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+  input, select, textarea {
+    font: inherit; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--text);
+    background: var(--ink-2); border: 1px solid var(--line-2); border-radius: 3px; padding: 11px 12px; width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--cyan); }
+  select option { background: var(--ink-2); }
+  .hp { position: absolute; left: -9999px; }
+  .fine { font-size: 12px; color: var(--text-4); line-height: 1.5; }
+  .btn { justify-self: start; border: 0; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .two { grid-template-columns: 1fr; } .form { padding: 20px; } }
+</style>

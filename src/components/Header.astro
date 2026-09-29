@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+const published = await getCollection('insights', ({ data }) => !data.draft);
+const onHome = Astro.url.pathname === '/';
+const h = (id: string) => (onHome ? `#${id}` : `/#${id}`);
+const links = [
+  { href: h('services'), label: 'Services' },
+  { href: h('experience'), label: 'Experience' },
+  { href: h('data'), label: 'Data handling' },
+  { href: '/capabilities', label: 'Capabilities' },
+  ...(published.length ? [{ href: '/insights', label: 'Insights' }] : []),
+];
+---
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo" aria-label="Axiom Civil home">
+      <img src="/brand/axiom-horizontal-dark.svg" alt="Axiom Civil" width="210" height="44" />
+    </a>
+    <nav aria-label="Main">
+      <ul id="nav-links" class="links">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        <li><a href={h('contact')} class="cta">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(7, 10, 16, 0.86);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 14px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .logo img { height: 38px; width: auto; }
+  .links { display: flex; align-items: center; gap: 1.9rem; list-style: none; }
+  .links a { font-size: 13.5px; color: var(--text-3); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+  .links a:hover { color: var(--text); }
+  .links .cta { color: var(--cyan); border: 1px solid var(--cyan-line); padding: 7px 18px; border-radius: 3px; }
+  .links .cta:hover { background: var(--cyan-dim); color: var(--cyan); }
+  .burger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .burger span { width: 22px; height: 1.5px; background: var(--text-2); display: block; transition: transform 0.2s, opacity 0.2s; }
+  .burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  @media (max-width: 860px) {
+    .burger { display: flex; }
+    .logo img { height: 32px; }
+    .links {
+      display: none; position: fixed; top: 61px; left: 0; right: 0;
+      flex-direction: column; align-items: flex-start; gap: 1.25rem;
+      padding: 1.5rem var(--gutter) 2rem; background: rgba(7, 10, 16, 0.98);
+      border-bottom: 1px solid var(--line);
+    }
+    .links.open { display: flex; }
+    .links a { font-size: 16px; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.burger');
+  const list = document.getElementById('nav-links');
+  if (btn && list) {
+    const set = (open: boolean) => {
+      list.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    btn.addEventListener('click', () => set(!list.classList.contains('open')));
+    list.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  }
+</script>

@@ -1,0 +1,32 @@
+{
+  "name": "Axiom Civil",
+  "url": "https://axiomcivil.com",
+  "legalEntity": "A4 Strategic Solutions LLC",
+  "legalLine": "Axiom Civil is a practice of A4 Strategic Solutions LLC.",
+  "tagline": "Survey management and data processing for heavy civil infrastructure.",
+  "description": "Axiom Civil provides senior survey management, project engineering support, and on-premise survey data processing for marine, transit, bridge, tunnel, and federal infrastructure projects. Led by a California Professional Land Surveyor with 25+ years in heavy civil construction.",
+  "principal": {
+    "name": "Choice Sterling",
+    "credentials": "PLS",
+    "title": "Founder & Principal",
+    "license": "California Professional Land Surveyor (licensed 2022)",
+    "email": "choice@axiomcivil.com",
+    "phone": "727-420-1894",
+    "phoneE164": "+17274201894"
+  },
+  "federal": {
+    "uei": null,
+    "cage": null,
+    "samRegistration": "In progress",
+    "naics": [
+      { "code": "541370", "title": "Surveying and Mapping (except Geophysical) Services" },
+      { "code": "541330", "title": "Engineering Services" },
+      { "code": "541690", "title": "Other Scientific and Technical Consulting Services" },
+      { "code": "518210", "title": "Computing Infrastructure Providers, Data Processing, Web Hosting" }
+    ],
+    "socioeconomic": [],
+    "veteranNote": "Founder is a U.S. Marine Corps veteran."
+  },
+  "licensingNotice": "Land surveying services are offered only in jurisdictions where Axiom Civil and its surveyors hold the required licenses and registrations.",
+  "experienceNotice": "Project experience listed was performed by Axiom Civil's founder while employed by the prime contractors named. Agencies and contractors are listed to describe that experience and do not imply endorsement of Axiom Civil."
+}

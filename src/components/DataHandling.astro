@@ -1,0 +1,36 @@
+---
+import c from '../data/compute.json';
+---
+<section class="band alt" id="data">
+  <div class="wrap">
+    <p class="eyebrow">{c.eyebrow}</p>
+    <h2 class="reveal">{c.heading}</h2>
+    <div class="grid">
+      <div class="reveal">{c.paragraphs.map((p) => <p class="body">{p}</p>)}</div>
+      <div class="panel reveal">
+        <div class="head">// how we handle your data</div>
+        <ul>
+          {c.points.map((p) => (
+            <li>
+              <span class="dot" aria-hidden="true"></span>
+              <div><strong>{p.title}</strong><span>{p.desc}</span></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); margin-top: 2.25rem; align-items: start; }
+  .panel { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--ink); }
+  .head { background: var(--ink-3); padding: 12px 20px; border-bottom: 1px solid var(--line); font-family: var(--f-mono); font-size: 11.5px; color: var(--text-4); letter-spacing: 0.06em; }
+  ul { list-style: none; }
+  li { display: flex; gap: 1rem; padding: 15px 20px; border-top: 1px solid var(--line); }
+  li:first-child { border-top: 0; }
+  .dot { width: 6px; height: 6px; border-radius: 1px; background: var(--cyan); flex-shrink: 0; margin-top: 7px; }
+  strong { display: block; font-weight: 400; font-size: 14px; color: var(--text-2); }
+  span { font-size: 12.5px; color: var(--text-3); line-height: 1.5; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,16 @@
+{
+  "eyebrow": "Data handling",
+  "heading": "Your project data stays on hardware we own.",
+  "paragraphs": [
+    "Point clouds, imagery, and project documents are processed on Axiom-owned GPU workstations in a controlled, on-premise environment. We don't upload client data to third-party AI services.",
+    "Where AI helps — reviewing specifications and submittals, drafting deviation reports, organizing contract documents — it runs on open-weight models hosted on our own hardware. A licensed surveyor reviews every deliverable.",
+    "Storage, retention, transfer, and destruction terms are set per engagement to match your contract's data-handling requirements."
+  ],
+  "points": [
+    { "title": "On-premise GPU compute", "desc": "Workstation-class NVIDIA GPUs sized for dense point clouds, photogrammetry, and mesh reconstruction." },
+    { "title": "Self-hosted AI models", "desc": "Open-weight language models run locally for document review and report drafting." },
+    { "title": "No third-party AI services for client data", "desc": "Client files are not sent to external AI providers." },
+    { "title": "Licensed review", "desc": "Every deliverable is checked and signed off by a Professional Land Surveyor." },
+    { "title": "Engagement-specific terms", "desc": "Data-handling terms written to your contract, not a generic policy." }
+  ]
+}

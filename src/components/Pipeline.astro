@@ -1,0 +1,67 @@
+---
+import stages from '../data/pipeline.json';
+---
+<section class="band" id="process">
+  <div class="wrap grid">
+    <div class="reveal">
+      <p class="eyebrow">Process</p>
+      <h2>From raw scan to signed deliverable.</h2>
+      <p class="body">The same survey software owners already accept, running on in-house GPU hardware — with a licensed surveyor reviewing every step before anything leaves the office.</p>
+    </div>
+    <div class="stage reveal" data-pipeline>
+      <div class="track" role="tablist" aria-label="Processing stages">
+        {stages.map((s, i) => (
+          <button class:list={['step', { active: i === 0 }]} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`stage-${i}`} id={`tab-${i}`} data-i={i}>
+            <span class="n">0{i + 1}</span>
+            <span class="l">{s.label}</span>
+            <span class="bar"></span>
+          </button>
+        ))}
+      </div>
+      <div class="panels">
+        {stages.map((s, i) => (
+          <div class="panel" id={`stage-${i}`} role="tabpanel" aria-labelledby={`tab-${i}`} hidden={i !== 0}>
+            <h3>{s.title}</h3>
+            <p class="body">{s.desc}</p>
+            <div class="tags">{s.tags.map((t) => <span class="tag cy">{t}</span>)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .track { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; }
+  .step { position: relative; background: none; border: 0; border-left: 1px solid var(--line); color: inherit; padding: 16px 6px; cursor: pointer; text-align: center; font: inherit; transition: background 0.3s; }
+  .step:first-child { border-left: 0; }
+  .step.active { background: rgba(51, 227, 240, 0.06); }
+  .n { display: block; font-family: var(--f-mono); font-size: 12px; color: var(--text-4); margin-bottom: 4px; transition: color 0.3s; }
+  .l { display: block; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-4); transition: color 0.3s; }
+  .step.active .n, .step.active .l { color: var(--cyan); }
+  .bar { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--cyan); }
+  .step.active .bar { width: 100%; transition: width 4.2s linear; }
+  .panels { border: 1px solid var(--line); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); background: var(--ink-2); padding: 26px 28px; min-height: 190px; }
+  .panel h3 { margin-bottom: 0.6rem; }
+  .panel .body { font-size: 14px; margin-bottom: 1rem; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } .l { font-size: 9px; letter-spacing: 0.04em; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-pipeline]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('.step')];
+    const panels = [...root.querySelectorAll<HTMLElement>('.panel')];
+    let cur = 0;
+    let timer: number | undefined;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const go = (n: number) => {
+      tabs[cur].classList.remove('active'); tabs[cur].setAttribute('aria-selected', 'false'); panels[cur].hidden = true;
+      cur = n;
+      tabs[cur].classList.add('active'); tabs[cur].setAttribute('aria-selected', 'true'); panels[cur].hidden = false;
+    };
+    const start = () => { if (!reduce) { clearInterval(timer); timer = window.setInterval(() => go((cur + 1) % tabs.length), 4400); } };
+    tabs.forEach((t, i) => t.addEventListener('click', () => { clearInterval(timer); go(i); }));
+    new IntersectionObserver(([e]) => (e.isIntersecting ? start() : clearInterval(timer)), { threshold: 0.3 }).observe(root);
+  });
+</script>

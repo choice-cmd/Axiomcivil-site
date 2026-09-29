@@ -1,0 +1,34 @@
+---
+import site from '../data/site.json';
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="wrap grid">
+    <div>
+      <img src="/brand/axiom-horizontal-dark.svg" alt="Axiom Civil" width="170" height="36" class="flogo" />
+      <p class="small">{site.legalLine}</p>
+    </div>
+    <div class="small right">
+      <a href={`mailto:${site.principal.email}`}>{site.principal.email}</a><br />
+      <a href={`tel:${site.principal.phoneE164}`}>{site.principal.phone}</a><br />
+      <a href="/capabilities">Capability statement</a> · <a href="/privacy">Privacy</a>
+    </div>
+  </div>
+  <div class="wrap fine">
+    <p>{site.licensingNotice}</p>
+    <p>© {year} {site.legalEntity}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .foot { position: relative; z-index: 1; border-top: 1px solid var(--line); background: var(--ink); padding: 44px 0 28px; }
+  .grid { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .flogo { height: 30px; width: auto; margin-bottom: 12px; }
+  .small { font-size: 13px; color: var(--text-3); line-height: 1.8; }
+  .small a { color: var(--text-3); text-decoration: none; }
+  .small a:hover { color: var(--cyan); }
+  .right { text-align: right; }
+  .fine { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .fine p { font-size: 11.5px; color: var(--text-4); max-width: 640px; }
+  @media (max-width: 640px) { .right { text-align: left; } }
+</style>

@@ -1,0 +1,7 @@
+[
+  { "label": "Capture", "title": "Field data capture", "desc": "Terrestrial scanning, UAV photogrammetry, and multibeam bathymetry — collected by your field crews or ours, tied to a documented control network.", "tags": ["Scanning", "UAV photogrammetry", "Multibeam", "Control networks"] },
+  { "label": "Point cloud", "title": "Registration & cleaning", "desc": "Scans registered to project control, noise removed, and points classified into ground, structure, and vegetation — with registration reports you can hand to the owner.", "tags": ["Trimble RealWorks", "Trimble Business Center", "Classification", "Registration QA"] },
+  { "label": "Model", "title": "Mesh & model extraction", "desc": "Dense meshes and structural elements extracted for BIM coordination, clash review, and as-built modeling.", "tags": ["Pix4D", "Civil 3D", "Navisworks", "Revit"] },
+  { "label": "Verify", "title": "Design verification", "desc": "As-built surfaces compared against design intent. Deviations are flagged, quantified, and reviewed by a licensed surveyor before anything leaves the office.", "tags": ["TIN surfaces", "Deviation analysis", "Licensed review"] },
+  { "label": "Deliver", "title": "Client deliverables", "desc": "Submittal-ready drawings, as-built documentation, models, and written reports — formatted to your project specifications and agency requirements.", "tags": ["As-builts", "Submittals", "3D models", "ProjectWise"] }
+]

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+const updated = 'September 2026';
+---
+<Base title="Privacy">
+  <section class="band" style="border-top:0;padding-top:140px">
+    <div class="wrap prose">
+      <p class="eyebrow">Privacy</p>
+      <h2>Privacy notice</h2>
+      <p>Last updated {updated}.</p>
+      <p>{site.legalLine} This notice covers axiomcivil.com.</p>
+      <h3>What we collect</h3>
+      <p>If you use the contact form, we receive the name, email, organization, and message you enter. The site is hosted on Netlify, which keeps standard server logs. We don't use advertising trackers or sell personal information.</p>
+      <h3>How we use it</h3>
+      <p>Only to respond to your inquiry and, if we work together, to manage that engagement. Inquiries may be sorted and summarized with software, including AI tools running on our own hardware; a person reads and answers every message.</p>
+      <h3>Project data</h3>
+      <p>Client project data is handled under the terms of each engagement, not this notice. Please don't send controlled or classified information through the website.</p>
+      <h3>Contact</h3>
+      <p>Questions or deletion requests: <a href={`mailto:${site.principal.email}`}>{site.principal.email}</a>.</p>
+    </div>
+  </section>
+</Base>

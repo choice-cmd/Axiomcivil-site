@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+<Base title="Insights" description="Notes on survey management, QA/QC, and data processing for heavy civil infrastructure.">
+  <section class="band" style="border-top:0;padding-top:140px;min-height:70vh">
+    <div class="wrap">
+      <p class="eyebrow">Insights</p>
+      <h2>Notes from the field.</h2>
+      {posts.length === 0 && <p class="lede">First posts are on the way.</p>}
+      <ul class="list">
+        {posts.map((p) => (
+          <li><a href={`/insights/${p.id}`}><span class="d">{fmt(p.data.pubDate)}</span><span class="t">{p.data.title}</span><span class="s">{p.data.description}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .list { list-style: none; margin-top: 2rem; max-width: 760px; }
+  .list li { border-top: 1px solid var(--line); }
+  .list a { display: grid; gap: 4px; padding: 20px 0; text-decoration: none; }
+  .d { font-family: var(--f-mono); font-size: 11px; color: var(--cyan); }
+  .t { font-size: 19px; font-weight: 300; }
+  .s { font-size: 14px; color: var(--text-3); }
+  .list a:hover .t { color: var(--cyan); }
+</style>

@@ -1,0 +1,59 @@
+---
+import stats from '../data/stats.json';
+---
+<section class="hero">
+  <div class="glow" aria-hidden="true"></div>
+  <img class="mark" src="/brand/axiom-mark-dark.svg" alt="" aria-hidden="true" width="660" height="480" />
+  <div class="wrap">
+    <p class="eyebrow a1">Survey management · Data processing · Heavy civil</p>
+    <h1 class="a2">Where critical infrastructure<br /><span class="dim">meets absolute precision.</span></h1>
+    <p class="lede a3">
+      Senior survey leadership and on-premise data processing for marine, transit, bridge, tunnel, and federal projects —
+      from a California Professional Land Surveyor with 25 years in heavy civil construction.
+    </p>
+    <div class="actions a4">
+      <a href="#contact" class="btn btn-primary">Start a conversation</a>
+      <a href="/capabilities" class="btn btn-ghost">Capability statement →</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap row">
+    {stats.map((s) => (
+      <div class="stat reveal">
+        <div class="num">{s.value}<em>{s.suffix}</em></div>
+        <div class="lbl">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .hero { position: relative; z-index: 1; min-height: 92vh; display: flex; align-items: center; padding: 130px 0 80px; overflow: hidden; }
+  .glow { position: absolute; top: 10%; right: -8%; width: 720px; height: 720px; background: radial-gradient(circle, rgba(51, 227, 240, 0.07) 0%, transparent 65%); pointer-events: none; }
+  .mark { position: absolute; right: -4%; top: 50%; transform: translateY(-46%); width: min(52vw, 660px); height: auto; opacity: 0.16; pointer-events: none; }
+  .hero .wrap { width: 100%; }
+  h1 { font-size: clamp(36px, 5vw, 64px); max-width: 920px; margin-bottom: 1.6rem; }
+  h1 .dim { color: rgba(255, 255, 255, 0.4); }
+  .lede { margin-bottom: 2.4rem; }
+  .actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .a1, .a2, .a3, .a4 { opacity: 0; animation: up 0.8s ease forwards; }
+  .a2 { animation-delay: 0.15s; } .a3 { animation-delay: 0.3s; } .a4 { animation-delay: 0.45s; }
+  @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  .stats { position: relative; z-index: 1; background: var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 28px 24px; border-left: 1px solid var(--line); }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .num { font-size: 32px; font-weight: 300; letter-spacing: -0.02em; line-height: 1; margin-bottom: 8px; }
+  .num em { font-style: normal; color: var(--cyan); }
+  .lbl { font-size: 12.5px; color: var(--text-3); line-height: 1.45; }
+  @media (max-width: 760px) {
+    .mark { opacity: 0.1; width: 90vw; right: -30%; }
+    .row { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 22px 16px; }
+    .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  }
+</style>

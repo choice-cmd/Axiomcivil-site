@@ -1,0 +1,138 @@
+---
+// One-page capability statement, generated from the same data as the home page.
+// "Print / Save as PDF" produces the version you attach to bids and emails.
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import site from '../data/site.json';
+import compute from '../data/compute.json';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects', ({ data }) => !data.hidden)).sort((a, b) => a.data.order - b.data.order);
+const f = site.federal;
+const show = (v: string | null) => v ?? 'Registration in progress';
+---
+<Base title="Capability statement" description={`${site.name} capability statement: core competencies, differentiators, past performance, NAICS codes, and contact.`}>
+  <section class="page">
+    <div class="toolbar">
+      <a href="/" class="back">← axiomcivil.com</a>
+      <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <div class="sheet">
+      <header class="top">
+        <img src="/brand/axiom-horizontal.svg" alt="Axiom Civil" width="250" height="52" />
+        <div class="ttl">
+          <div class="k">Capability statement</div>
+          <div class="sub">{site.tagline}</div>
+        </div>
+      </header>
+
+      <div class="cols">
+        <div>
+          <h4>Company overview</h4>
+          <p>{site.description}</p>
+
+          <h4>Core competencies</h4>
+          {services.map((s) => (
+            <div class="svc">
+              <strong>{s.data.title}</strong>
+              <span>{s.data.bullets.slice(0, 5).join(' · ')}</span>
+            </div>
+          ))}
+
+          <h4>Differentiators</h4>
+          <ul>
+            <li>Licensed Professional Land Surveyor leads every engagement.</li>
+            <li>25+ years in heavy civil; directed survey across a $4.55B portfolio.</li>
+            {compute.points.slice(0, 3).map((p) => <li>{p.title}: {p.desc}</li>)}
+            <li>{f.veteranNote}</li>
+          </ul>
+        </div>
+
+        <aside>
+          <h4>Company data</h4>
+          <dl>
+            <dt>Legal entity</dt><dd>{site.legalEntity}</dd>
+            <dt>UEI</dt><dd>{show(f.uei)}</dd>
+            <dt>CAGE</dt><dd>{show(f.cage)}</dd>
+            <dt>SAM.gov</dt><dd>{f.samRegistration}</dd>
+            {f.socioeconomic.length > 0 && (<><dt>Certifications</dt><dd>{f.socioeconomic.join(', ')}</dd></>)}
+          </dl>
+
+          <h4>NAICS</h4>
+          <ul class="naics">{f.naics.map((n) => <li><b>{n.code}</b> {n.title}</li>)}</ul>
+
+          <h4>Contact</h4>
+          <p class="contact">
+            <strong>{site.principal.name}, {site.principal.credentials}</strong><br />
+            {site.principal.title}<br />
+            {site.principal.email}<br />
+            {site.principal.phone}<br />
+            axiomcivil.com
+          </p>
+        </aside>
+      </div>
+
+      <h4>Past performance (founder's project experience)</h4>
+      <table>
+        <thead><tr><th>Project</th><th>Owner</th><th>Value</th><th>Role</th></tr></thead>
+        <tbody>
+          {projects.map((p) => (
+            <tr><td>{p.data.title}</td><td>{p.data.owner}</td><td>{p.data.value}</td><td>{p.data.role}{p.data.contractor ? ` (${p.data.contractor})` : ''}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="fine">{site.experienceNotice} {site.legalLine}</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page { position: relative; z-index: 1; padding: 110px var(--gutter) 60px; }
+  .toolbar { max-width: 8.5in; margin: 0 auto 16px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .back { color: var(--text-3); text-decoration: none; font-size: 14px; }
+  .back:hover { color: var(--cyan); }
+  .sheet {
+    max-width: 8.5in; margin: 0 auto; background: #fff; color: #0b0f17;
+    padding: 0.55in 0.6in; border-radius: 3px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    font-size: 11.5px; line-height: 1.5;
+  }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-bottom: 14px; border-bottom: 3px solid #0a1e33; margin-bottom: 14px; flex-wrap: wrap; }
+  .top img { height: 44px; width: auto; }
+  .ttl { text-align: right; }
+  .k { font-family: var(--f-display); font-weight: 700; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #0a1e33; }
+  .sub { font-size: 11px; color: #4a5566; }
+  .cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 26px; }
+  aside { background: #f2f5f8; padding: 4px 16px 14px; border-top: 3px solid #33e3f0; }
+  h4 { font-family: var(--f-display); font-weight: 700; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #0a1e33; margin: 14px 0 6px; }
+  p { color: #273142; }
+  .svc { margin-bottom: 6px; }
+  .svc strong { display: block; font-weight: 600; color: #0b0f17; }
+  .svc span { color: #4a5566; }
+  ul { padding-left: 16px; color: #273142; }
+  li { margin-bottom: 2px; }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; }
+  dt { font-weight: 600; color: #0b0f17; }
+  dd { color: #273142; }
+  .naics { list-style: none; padding: 0; }
+  .naics b { font-family: var(--f-mono); font-weight: 400; color: #0a1e33; margin-right: 4px; }
+  .contact strong { color: #0b0f17; }
+  table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+  th { text-align: left; font-weight: 600; background: #0a1e33; color: #fff; padding: 5px 7px; }
+  td { padding: 5px 7px; border-bottom: 1px solid #dde3ea; color: #273142; vertical-align: top; }
+  .fine { font-size: 9px; color: #6b7686; margin-top: 10px; }
+  @media (max-width: 720px) {
+    .sheet { padding: 24px 18px; }
+    .cols { grid-template-columns: 1fr; }
+    .ttl { text-align: left; }
+    table { display: block; overflow-x: auto; }
+  }
+  @media print {
+    @page { size: letter; margin: 0.4in; }
+    :global(body) { background: #fff !important; }
+    :global(body::before), :global(.nav), :global(.foot), :global(.skip), .toolbar { display: none !important; }
+    .page { padding: 0; }
+    .sheet { box-shadow: none; padding: 0; max-width: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>

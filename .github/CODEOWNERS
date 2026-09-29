@@ -1,0 +1,9 @@
+# Choice must approve every change. Guardrail files are listed explicitly
+# so a change to them is always visible in review.
+*                           @choice-cmd
+/AGENTS.md                  @choice-cmd
+/scripts/check-claims.mjs   @choice-cmd
+/src/content.config.ts      @choice-cmd
+/.github/                   @choice-cmd
+/netlify.toml               @choice-cmd
+/src/content/insights/      @choice-cmd
