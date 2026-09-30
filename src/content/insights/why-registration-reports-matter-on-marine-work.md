@@ -6,13 +6,13 @@ author: Choice Sterling, PLS
 draft: true
 tags: [QA/QC, Point clouds, Marine]
 ---
-When a point cloud leaves the office on a marine project, the first thing I look for is the registration report. On federal work, it's not paperwork for its own sake — it's how everyone downstream knows the scan is trustworthy before anyone builds off it.
+When a point cloud leaves the office on any project, the first thing I look for is the registration report. On mega projecs and especially federal marine work, it's not paperwork for its own sake — it's how everyone downstream knows the scan is trustworthy before anyone builds off it.
 
 ## What a registration report is really telling you
 
-A shipyard or dry dock is too big for one scan setup. You take dozens of scans from different stands — on piers, on barges, on ladder stages over the water — and the software stitches them into one model. Registration is the step where all those individual scans get aligned into a single coordinate system. The report is the record of how well that alignment worked: how many setups, how they connect to each other, and the residuals showing where adjacent scans agree or disagree.
+A mega marine infrastructure project is too big for one scan setup. You take dozens of scans from different stands — on piers, on barges, on ladder stages over the water — and the software stitches them into one model. Registration is the step where all those individual scans get aligned into a single coordinate system. The report is the record of how well that alignment worked: how many setups, how they connect to each other, and the residuals showing where adjacent scans agree or disagree.
 
-A report that only shows scan-to-scan error tells you the model is internally consistent — the pieces fit together. That's necessary, but on federal marine work it's not enough.
+A report that only shows scan-to-scan error tells you the model is internally consistent — the pieces fit together. That's necessary, but on federal USACE marine work it's not enough.
 
 ## Why control checks matter more than ever
 
@@ -28,15 +28,15 @@ A few things I expect before anyone treats a marine point cloud as final:
 
 - A registration report with the error statistics spelled out, not buried.
 - Control points included in the scan, and residuals reported against them.
-- The control network itself documented, so the origin is traceable to something, not just to an arbitrary setup.
+- The control network itself documented, so the origin is traceable to primary control established in the contract documents, not just to an arbitrary setup.
 - A check that the cloud agrees with the design geometry, not just with itself.
 
-If any of those are missing, I flag it. On a $300-million federal marine project, a cloud that's off by the width of a rebar lap can turn into a costly change order downstream. Catching it in the report costs minutes.
+If any of those are missing, I flag it. On a multi-hundred million dollar federal marine project, a cloud that's off by the width of a rebar can turn into a costly change order downstream. Catching it in the report costs minutes.
 
 ## The marine part is the hard part
 
-Registration is where the environment fights back on marine work. Reflective steel, wet surfaces, moving equipment, setups limited by where there's a stable place to stand. All of that creates noise and drift that don't exist on dry land. The report is where that shows up before it becomes a field problem. Good control checks are what separate a cloud you can build from one you're taking the field team's word on.
+Registration is where the environment fights back on marine work. Reflective steel, wet surfaces, moving equipment, setups limited by where there's a stable place to stand. All of that creates noise and drift that isn't necessarily encountered on dry land. The report is where that shows up before it becomes a field problem. Good control checks are what separate a cloud you can build from to one you're hoping is correct.
 
 My experience includes work on federal marine projects — explosives handling wharves, operational dry docks, and pier work at naval shipyards. None of that goes forward on a cloud that hasn't proven itself against control. The report is how we prove it.
 
-If you're an owner's rep or a project manager on a marine job, the shortcut is simple: ask to see the registration report and the control residuals before you sign off on the scan. If they're not there, that's a conversation worth having — before the concrete goes in, not after.
+If you're an owner's rep or a project manager on a marine job, this shortcut is simple: ask to see the registration report and the control residuals before you sign off on the scan. If they're not there, that's a conversation worth having — before the concrete goes in, not after.
