@@ -1,0 +1,217 @@
+---
+// New standalone page: AI-assisted survey workflows, restyled into the existing
+// site design system. Copy avoids specific figures per the claims policy and
+// uses "AI assists, a licensed surveyor reviews" framing.
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+
+const stages = [
+  {
+    n: '01',
+    label: 'Field acquisition',
+    title: 'Aerial LiDAR & mobile SLAM',
+    traditional:
+      'Conventional optical topographic surveys need multi-person crews walking hazardous slopes or live corridors, and sparse point spacing easily misses subtle grades, transitions, and stockpile volumes.',
+    axiom:
+      'We fly high-return LiDAR tied to survey-grade RTK control and pair it with handheld kinematic SLAM where access is tight — mapping complex terrain while construction traffic keeps moving. A surveyor validates the control network and coverage before processing begins.',
+    tags: ['Aerial LiDAR', 'Mobile SLAM', 'RTK control', 'Control networks'],
+  },
+  {
+    n: '02',
+    label: 'Neural point-cloud processing',
+    title: 'Deep-learning point-cloud classification',
+    traditional:
+      'Classifying raw points into bare-earth and structure surfaces by hand takes days of cross-sections and guesswork at vegetation edges, where ground, brush, and structures blur together.',
+    axiom:
+      'Scans run through trained point-cloud deep-learning models on our on-premise GPU workstations to separate ground, vegetation, and structures. A licensed surveyor reviews the classified surface and registration before it moves downstream.',
+    tags: ['Bare-earth models', 'Structure & vegetation', 'Registration QA'],
+  },
+  {
+    n: '03',
+    label: 'CAD vectorization',
+    title: 'Computer-vision base mapping',
+    traditional:
+      'Tracing planimetric base maps from orthoimagery and contours is the slowest phase of civil design — hundreds of hours of clicking vertices to trace curbs, asphalt limits, and utilities.',
+    axiom:
+      'Vision models detect curbs, surfaces, utilities, and structures and place them onto standard Civil 3D layers. A surveyor corrects and approves the linework before it is issued, so drawings meet agency layer standards.',
+    tags: ['Civil 3D', 'GIS', 'Agency layer standards'],
+  },
+  {
+    n: '04',
+    label: 'Field layout',
+    title: 'Robotic field positioning & layout',
+    traditional:
+      'Layout with multi-person crews calling offsets over engine noise and hand-written grade stakes leads to costly rework when a stake is misread or kicked.',
+    axiom:
+      'A single survey technician runs a robotic total station with active prism lock, streaming design coordinates directly to the field. The technician verifies cut and fill on the grade before work proceeds.',
+    tags: ['Robotic total station', 'Design-to-field', 'Cut & fill checks'],
+  },
+  {
+    n: '05',
+    label: 'Deliverables & QA/QC',
+    title: 'Digital twins & variance analysis',
+    traditional:
+      'As-built surveys are often commissioned at the end — long after concrete, utilities, and steel are in — when a deviation means demolition or a change order.',
+    axiom:
+      'We capture reality scans after milestone pours and lifts, register them against the design model, and flag deviations before trades move on. A licensed surveyor reviews each deviation report for the owner.',
+    tags: ['Scan-to-BIM', 'Deviation reports', 'As-builts'],
+  },
+];
+---
+<Base
+  title="AI survey workflows"
+  description="AI-assisted survey workflows for heavy civil and federal projects — aerial LiDAR and mobile SLAM capture, point-cloud classification, CAD vectorization, robotic layout, and as-built variance QA/QC, with a licensed surveyor reviewing every deliverable."
+>
+  <section class="hero band">
+    <div class="wrap">
+      <p class="eyebrow a1">AI survey workflows</p>
+      <h1 class="a2">From field capture to as-built certainty —<br /><span class="dim">accelerated.</span></h1>
+      <p class="lede a3">
+        We pair rugged capture hardware and on-premise deep-learning models with a licensed surveyor's review at
+        every stage, collapsing the gap between field data and verified deliverables on heavy-civil, federal, and DOD work.
+      </p>
+      <div class="actions a4">
+        <a href="#workflow" class="btn btn-primary">View the workflow</a>
+        <a href="#scope" class="btn btn-ghost">Request a scope review</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="workflow">
+    <div class="wrap">
+      <p class="eyebrow">Workflow</p>
+      <h2>A five-stage pipeline, reviewed at every step.</h2>
+      <p class="body lead">
+        From calibrated sensor capture through point-cloud processing, vectorization, field layout, and as-built QA/QC —
+        each stage is designed to move faster than a traditional workflow while keeping survey oversight in control.
+      </p>
+      <div class="stages">
+        {stages.map((s) => (
+          <article class="stage reveal">
+            <div class="num">{s.n}</div>
+            <div class="stage-body">
+              <p class="eyebrow sub">{s.label}</p>
+              <h3>{s.title}</h3>
+              <p class="body"><strong class="k">The conventional way.</strong> {s.traditional}</p>
+              <p class="body"><strong class="k">The Axiom workflow.</strong> {s.axiom}</p>
+              <div class="tags">{s.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt note-band">
+    <div class="wrap">
+      <p class="eyebrow">How AI fits</p>
+      <h2 class="short">AI assists. A licensed surveyor reviews.</h2>
+      <p class="body">
+        Where AI helps — classifying point clouds, vectorizing linework, drafting deviation reports — it runs on
+        open-weight models on Axiom-owned hardware, and client data is not sent to third-party AI services.
+        Every deliverable is checked and signed off by a California Professional Land Surveyor.
+      </p>
+    </div>
+  </section>
+
+  <section class="band" id="scope">
+    <div class="wrap grid">
+      <div class="reveal">
+        <p class="eyebrow">Scope review</p>
+        <h2>Deploy AI survey workflows on your next build.</h2>
+        <p class="body">
+          Tell us your tolerances, site parameters, and deliverable targets. Our survey and geomatics team reviews the
+          project and responds with a fit and a scope before you commit.
+        </p>
+        <p class="body direct">
+          Or reach us directly at <a href={`mailto:${site.principal.email}`}>{site.principal.email}</a>.
+        </p>
+      </div>
+      <form class="form reveal" name="survey-scope" method="POST" action="/thanks" data-netlify="true" netlify-honeypot="company_website">
+        <input type="hidden" name="form-name" value="survey-scope" />
+        <p class="hp"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="two">
+          <label>Project name<input name="project" required autocomplete="organization" /></label>
+          <label>Work email<input name="email" type="email" required autocomplete="email" /></label>
+        </div>
+        <div class="two">
+          <label>Organization<input name="organization" autocomplete="organization" /></label>
+          <label>Target positional tolerance
+            <select name="tolerance">
+              <option>Earthwork / grading</option>
+              <option>Concrete / curb</option>
+              <option>Structural (embeds, anchor bolts)</option>
+              <option>Topographic base mapping</option>
+              <option>Not sure yet — want guidance</option>
+            </select>
+          </label>
+        </div>
+        <fieldset>
+          <legend>Requested capabilities</legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="capabilities" value="Aerial LiDAR & photogrammetry" />Aerial LiDAR &amp; photogrammetry</label>
+            <label class="check"><input type="checkbox" name="capabilities" value="Point-cloud classification" />Point-cloud classification</label>
+            <label class="check"><input type="checkbox" name="capabilities" value="Automated CAD linework" />Automated CAD linework</label>
+            <label class="check"><input type="checkbox" name="capabilities" value="Robotic layout staking" />Robotic layout staking</label>
+            <label class="check"><input type="checkbox" name="capabilities" value="As-built variance QA/QC" />As-built variance QA/QC</label>
+          </div>
+        </fieldset>
+        <label>Scope narrative or spec notes<textarea name="message" rows="4" required placeholder="Project, location, schedule, and the tolerances you're held to."></textarea></label>
+        <p class="fine">Please don't send controlled or classified information through this form. We'll arrange a secure channel if the project needs one.</p>
+        <button class="btn btn-primary" type="submit">Request scope review</button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { min-height: 76vh; display: flex; align-items: center; padding: 150px 0 70px; }
+  .hero h1 { font-size: clamp(34px, 4.6vw, 58px); max-width: 900px; margin-bottom: 1.5rem; }
+  .hero h1 .dim { color: rgba(255, 255, 255, 0.4); }
+  .lede { margin-bottom: 2.2rem; }
+  .actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .a1, .a2, .a3, .a4 { opacity: 0; animation: up 0.8s ease forwards; }
+  .a2 { animation-delay: 0.15s; } .a3 { animation-delay: 0.3s; } .a4 { animation-delay: 0.45s; }
+  @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  .lead { max-width: 620px; margin-bottom: 2rem; }
+  .stages { display: grid; gap: 0; }
+  .stage {
+    display: grid; grid-template-columns: 88px 1fr; gap: clamp(18px, 3vw, 40px);
+    padding: 26px 0; border-bottom: 1px solid var(--line);
+  }
+  .stage:first-of-type { border-top: 1px solid var(--line); }
+  .num { font-family: var(--f-mono); font-size: 15px; color: var(--cyan); padding-top: 4px; }
+  .stage h3 { font-size: 22px; margin-bottom: 0.75rem; }
+  .stage .body { margin-bottom: 0.75rem; max-width: 720px; }
+  .stage .k { color: var(--text-2); font-weight: 500; }
+  .stage .tags { margin-top: 0.5rem; }
+  @media (max-width: 600px) { .stage { grid-template-columns: 1fr; } }
+
+  .note-band h2.short { max-width: 620px; }
+
+  .grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  .direct { margin-top: 1.5rem; }
+  .direct a { color: var(--cyan); text-decoration: none; }
+  .direct a:hover { text-decoration: underline; }
+
+  .form { display: grid; gap: 16px; background: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label, legend { display: grid; gap: 6px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+  legend { padding: 0; }
+  input, select, textarea {
+    font: inherit; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--text);
+    background: var(--ink-2); border: 1px solid var(--line-2); border-radius: 3px; padding: 11px 12px; width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--cyan); }
+  select option { background: var(--ink-2); }
+  fieldset { border: 0; padding: 0; display: grid; gap: 8px; }
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+  .check { display: flex; align-items: center; gap: 8px; font: inherit; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--text-2); }
+  .check input { width: auto; }
+  .hp { position: absolute; left: -9999px; }
+  .fine { font-size: 12px; color: var(--text-4); line-height: 1.5; }
+  .btn { justify-self: start; border: 0; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .two, .checks { grid-template-columns: 1fr; } .form { padding: 20px; } }
+</style>
