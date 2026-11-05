@@ -42,4 +42,17 @@ const insights = defineCollection({
   }),
 });
 
-export const collections = { services, projects, insights };
+const stories = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/stories' }),
+  schema: z.object({
+    title: z.string().max(90),
+    description: z.string().max(200),
+    category: z.enum(['Lessons learned', 'Teaching', 'Field notes', 'Other']).default('Other'),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    author: z.string().default('Choice Sterling, PLS'),
+    draft: z.boolean().default(true), // agents create drafts; only Choice flips this
+  }),
+});
+
+export const collections = { services, projects, insights, stories };
